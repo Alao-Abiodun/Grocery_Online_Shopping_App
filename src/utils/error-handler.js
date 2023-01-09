@@ -14,7 +14,7 @@ class ErrorLogger {
     constructor(){}
     async logError(err){
         console.log('==================== Start Error Logger ===============');
-        LogErrors.log({
+        LogErrors.log({                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
             private: true,
             level: 'error',
             message: `${new Date()}-${JSON.stringify(err)}`
