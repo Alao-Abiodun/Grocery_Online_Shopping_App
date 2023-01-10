@@ -4,24 +4,24 @@ const jwt  = require('jsonwebtoken');
 const { APP_SECRET } = require('../config');
 
 //Utility functions
-module.exports.GenerateSalt = async() => {
-        return await bcrypt.genSalt()    
-},
+exports.GenerateSalt = async() => {
+        return await bcrypt.getSalt();
+}
 
-module.exports.GeneratePassword = async (password, salt) => {
+exports.GeneratePassword = async (password, salt) => {
         return await bcrypt.hash(password, salt);
 };
 
 
-module.exports.ValidatePassword = async (enteredPassword, savedPassword, salt) => {
+exports.ValidatePassword = async (enteredPassword, savedPassword, salt) => {
         return await this.GeneratePassword(enteredPassword, salt) === savedPassword;
 };
 
-module.exports.GenerateSignature = async (payload) => {
+exports.GenerateSignature = async (payload) => {
         return await jwt.sign(payload, APP_SECRET, { expiresIn: '1d'} )
 }, 
 
-module.exports.ValidateSignature  = async(req) => {
+exports.ValidateSignature  = async(req) => {
 
         const signature = req.get('Authorization');
         
@@ -34,10 +34,10 @@ module.exports.ValidateSignature  = async(req) => {
         return false
 };
 
-module.exports.FormateData = (data) => {
+exports.FormateData = (data) => {
         if(data){
             return { data }
         }else{
             throw new Error('Data Not found!')
         }
-    }
+}
